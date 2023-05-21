@@ -1,0 +1,83 @@
+{% extends "base/base.html" %}
+
+{% block title %}Cart{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <h1 class="mb-4 text-light text-center" style="margin-left: auto; margin-right: auto;">Shopping Cart</h1>
+
+    <div class="row mb-4 rounded shadow-sm bg-dark" style="width: 1000px; margin-left: auto; margin-right: auto;" name="label">
+        <div class="col-md-auto">
+            <h4 class="text-left"> </h4>
+        </div>
+        <div class="col-md-auto mt-2 mb-2">
+            <h4 class="text-left text-light">Product</h4>
+        </div>
+        <div class="col-lg-7">
+            <h4 class="text-left"> </h4>
+        </div>
+        <div class="col-md-1 mt-2 mb-2" style="margin-right: 10px">
+            <h4 class="text-left text-light" style="margin-left: -20px;">Price</h4>
+        </div>
+    </div>
+
+    <div class="row" style="width: 1000px; margin-left: auto; margin-right: auto;">
+        <div class="col-md-12" name="itemcontainer">
+            {% for cart in cartdetail %}
+            <div class="row mb-4 rounded border shadow-sm cart-item">
+                <div class="col-md-3 mt-2 mb-2" style="max-width: 200px; max-height: 200px;">
+                    <img src="{{ cart.product.image.url }}" alt="{{ cart.product.name }}" class="img-fluid" style="max-width: 100%; max-height: 100%;">
+                </div>
+                
+                <div class="col-md-6 d-flex align-items-center">
+                    <div class="d-flex flex-column">
+                        <h4 class="text-center text-light">{{ cart.product.name }}</h4>
+                        
+                    </div>
+                </div>
+                <div class="col-md-3 d-flex align-items-center justify-content-end">
+                    <h4 class="text-right mb-0 text-light" style="margin-right: 100px">${{ cart.get_item_total }}</h4>
+                    <form method="post" action="{% url 'removefromcart' cart.id %}" class="ml-3">
+                        {% csrf_token %}
+                        <button class="btn btn-outline-light btn-sm" type="submit"><i class="fa-solid fa-trash"></i> Remove</button>
+                    </form>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    
+    <div class="row mb-4 " style="width: 1000px; margin-left: auto; margin-right: auto;" name="total">
+        <div class="col-md-auto">
+            <h4 class="text-left"> </h4>
+        </div>
+        <div class="col-md-auto mt-2 mb-2">
+            <h4 class="text-left text-light">Total Price:</h4>
+        </div>
+        <div class="col-lg-7">
+            <h4 class="text-left"> </h4>
+        </div>
+        <div class="col-md-1 mt-2 mb-2" style="margin-right: 10px">
+            <h4 class="text-left text-light" style="margin-left: -60px;">${{ carttotal }}</h4>
+
+        </div>
+    </div>
+    
+    <div class="row mt-4 bg-dark rounded shadow-sm justify-content-center" style="width: 1000px; margin-left: auto; margin-right: auto;">
+        <div class="col-md-3">
+            <div class="d-flex justify-content-end">
+                <form method="post" action="{% url 'clearcart' %}">
+                    {% csrf_token %}
+                    <button class="btn btn-outline-light me-3 mt-4 mb-4" type="submit">Clear Cart</button>
+                </form>
+                <form method="post" action="{% url 'checkout' %}">
+                    {% csrf_token %}
+                    <button class="btn btn-outline-light mt-4 mb-4" type="submit">Checkout</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+
+</div>
+{% endblock %} 

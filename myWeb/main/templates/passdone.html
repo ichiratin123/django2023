@@ -1,0 +1,19 @@
+{% extends "base/base.html" %}
+{% block title %}Password done{% endblock %}
+{% block content %}
+<div class="container py-10 mt-5">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+            <div class="card bg-dark text-white" style="border-radius: 1rem; height: 500px">
+                <div class="card-body p-5 text-center d-flex flex-column justify-content-center align-items-center">
+                    <div class="mb-md-5 mt-md-4 pb-5">
+                        <h2 class="fw-bold mb-2 text-uppercase">Password Changed</h2>
+                        <p class="text-white-50 mb-5">Your password has been successfully changed!</p>
+                        <a href="{% url 'index' %}" class="btn btn-outline-light btn-lg px-5">Back to Home</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

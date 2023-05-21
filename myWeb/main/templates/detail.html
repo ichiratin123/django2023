@@ -1,0 +1,98 @@
+{% extends 'base/base.html' %}
+{% block title %}{{ product.name }}{% endblock title %}
+
+{% block content %}
+    {% if user.is_authenticated %}
+        <div class="container mt-3">
+            <div class="card bg-dark">
+                <div class="row">
+                    <div class="col-4">
+                        <img class="card-img-top" src="{{ product.image.url }}" alt="{{ product.name }}">
+                    </div>
+                    <div class="col-8">
+                        <div class="card-body">
+                            <h1 class="card-title text-light mb-3"><strong>{{ product.name }}</strong></h1>
+                            <div class="form-group row">
+                                <p class="col-sm-2 text-light" style="font-size: 20px;">Category:</p>
+                                <div class="col-sm-9">
+                                    <p class="form-control" style="font-size: 20px;">{{ product.category }}</p>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <p class="col-sm-2 text-light" style="font-size: 20px;">Description:</p>
+                                <div class="col-sm-9">
+                                    <p class="form-control" style="font-size: 20px;">{{ product.description }}</p>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <p class="col-sm-2 text-light" style="font-size: 20px;">Price:</p>
+                                <div class="col-sm-9">
+                                    <p class="form-control" style="font-size: 20px;">${{ product.price }}</p>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <p class="col-sm-2 text-light" style="font-size: 20px;">Availability:</p>
+                                <div class="col-sm-9 text-right">
+                                    {% if product.available %}
+                                        <p class="card-text">
+                                            <span style="display: inline-block; width: 10px; height: 10px; border-radius: 50%; background-color: green;"></span>
+                                            <span style="color: green; font-size: 20px;">Available</span>
+                                        </p>
+                                        {% if in_cart %}
+                                            <form method="post" action="{% url 'addtocart' product.id %}">
+                                                {% csrf_token %}
+                                                <button class="btn btn-primary mt-3" type="submit" style="margin-left: 230px;" disabled>Add to Cart</button>
+                                            </form>
+                                        {% else %}
+                                            <form method="post" action="{% url 'addtocart' product.id %}">
+                                                {% csrf_token %}
+                                                <button class="btn btn-primary mt-3" type="submit" style="margin-left: 230px;">Add to Cart</button>
+                                            </form>
+                                        {% endif %}
+                                    {% else %}
+                                        <p class="card-text">
+                                            <span style="display: inline-block; width: 10px; height: 10px; border-radius: 50%; background-color: red;"></span>
+                                            <span style="color: red; font-size: 20px;">Not available</span>
+                                        </p>
+                                        <form method="post" action="{% url 'addtocart' product.id %}">
+                                            {% csrf_token %}
+                                            <button class="btn btn-primary mt-5" style="margin-left: 230px;" disabled>Add to Cart</button>
+                                        </form>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-9 text-right">
+                                    <a href="{% url 'review' product.id %}" class="btn btn-primary mt-3" style="margin-left: 360px;">Write a Review</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container mt-3">
+            <div class="card bg-dark">
+                <div class="card-body">
+                    <h2 class="text-light mb-3">Product Reviews</h2>
+                    {% for review in reviews %}
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">{{ review.user.username }}</h4>
+                            <p class="card-text">{{ review.comment }}</p>
+                        </div>
+                    </div>
+                    {% empty %}
+                    <p class="text-light">No reviews available for this product.</p>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <div class="alert alert-warning text-center">
+            Please log in to view the product details.
+        </div>
+    {% endif %}
+{% endblock %}
+

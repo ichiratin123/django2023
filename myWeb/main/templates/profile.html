@@ -1,0 +1,39 @@
+{% extends "base/base.html" %}
+{% block title %}profile{% endblock %}
+{% block content %}
+<div class="container-fluid py-5 my-5 h-75">
+  <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-md-12 col-xl-6">
+
+          <div class="card bg-dark" style="border-radius: 15px; margin-top: 50px;">
+              <div class="card-body text-center p-5">
+                  <div class="mt-3 mb-4">
+                      <h3 class="text-center text-light">Hello, {{ request.user.username }}</h3>
+                      <p class="text-light">Welcome to our platform! We're excited to have you here. As a new user, you can explore various features and enjoy a seamless experience. Feel free to reach out if you have any questions or need assistance.</p>
+                  </div>
+                  <div class="mb-4 pb-2">
+                    <a href="{% url 'passchange'%}">
+                        <div class="mb-3">
+                            <button type="button" class="btn btn-outline-light btn-floating">
+                                Change Password
+                            </button>
+                        </div>
+                    </a>
+                      <div class="mb-3">
+                          <button type="button" class="btn btn-outline-light btn-floating">
+                              Button 2
+                          </button>
+                      </div>
+                      <div>
+                          <button type="button" class="btn btn-outline-light btn-floating">
+                              Button 3
+                          </button>
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+      </div>
+  </div>
+</div>
+{%endblock%}

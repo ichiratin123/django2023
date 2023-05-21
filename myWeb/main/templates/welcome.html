@@ -1,0 +1,19 @@
+{% extends "base/base.html" %}
+{% block title %}welcome{% endblock %}
+{% block content %}
+    <div class="container my-5 mb-100">
+        <div class="jumbotron">
+            <h1 class="display-4 text-light">Welcome to our website!</h1>
+            <p class="lead text-light">Thank you for visiting our website. We are dedicated to providing high-quality products and services to meet your needs. Our team of experts works hard to ensure that you have access to the latest and most innovative products available on the market.</p>
+            <p class="lead text-light">Take a moment to explore our site and learn more about what we have to offer. We have a wide range of products and services to meet your needs, whether you're looking for the latest technology, expert advice, or just a great deal.</p>
+            <hr class="my-4">
+            <p class="text-light">At our website, we understand that time is precious. That's why we offer convenient online ordering and fast, reliable shipping. We also offer a range of payment options, so you can choose the one that works best for you.</p>
+            <p class="text-light">Our commitment to customer satisfaction is second to none. If you have any questions or concerns, our friendly and knowledgeable customer service team is always here to help. We pride ourselves on providing exceptional service and support to our customers, and we look forward to serving you.</p>
+            <hr class="my-4">
+            <p class="text-light">Please log in or sign up to access our services:</p>
+            <a class="btn btn-primary btn-lg mr-2" href="{% url 'login' %}" role="button">Log In</a>
+            <a class="btn btn-success btn-lg" href="{% url 'signup' %}" role="button">Sign Up</a>
+            <a class="btn btn-success btn-lg" href="{% url 'index' %}" role="button">Products</a>
+        </div>
+    </div>
+{%endblock%}

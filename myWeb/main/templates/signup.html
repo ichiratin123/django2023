@@ -1,0 +1,49 @@
+{% extends 'base/base.html' %}
+{% block title %}sign up{% endblock title %}
+{% block content %}
+<div class="mask d-flex align-items-center h-100 gradient-custom-3 mt-5">
+  <div class="container h-100 ">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+          <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+              <div class="card bg-dark" style="border-radius: 15px;">
+                  <div class="card-body p-5">
+                      <h2 class="text-uppercase text-center mb-5 text-light">Create an account</h2>
+                      <form action="." method="POST">
+                          {% csrf_token %}
+                          <div class="form-outline mb-4 text-white">
+                              {{ form.username.label_tag }} {{ form.username }}
+                          </div>
+                          <div class="form-outline mb-4 text-white">
+                            {{ form.email.label_tag }} {{ form.email }}
+                        </div>
+                          <div class="form-outline mb-4 text-white">
+                              {{ form.password1.label_tag }} {{ form.password1 }}
+                          </div>
+                          <div class="form-outline mb-4 text-white">
+                              {{ form.password2.label_tag }} {{ form.password2 }}
+                          </div>
+
+                          {%if form.errors or form.non_field_errors%}
+                            <div class="alert alert-danger">
+                              {% for field in form %}
+                                {{field.errors}}
+                              {% endfor %}
+                              {{form.non_field_errors}}
+                            </div>
+                          {%endif%}
+
+                          <div class="d-flex justify-content-center">
+                              <button type="submit" class="btn btn-success btn-block btn-lg gradient-custom-4 text-light">Register</button>
+                          </div>
+                          
+                          <p class="text-center text-muted mt-5 mb-0 text-light">Have already an account? <a href="{% url 'login' %}" class="fw-bold text-white"><u>Login here</u></a></p>
+
+                      </form>
+
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+{%endblock%}

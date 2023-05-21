@@ -1,0 +1,19 @@
+{% extends 'base/base.html' %}
+{% block title %}Checkout Success{% endblock %}
+
+{% block content %}
+    <div class="container mt-3 d-flex justify-content-center align-items-center" style="height: 500px;">
+        <div class="card bg-dark" style="height: 500px; width: 700px;">
+            <div class="card-body d-flex flex-column justify-content-center align-items-center">
+                <h1 class="card-title text-light mb-3">Order Placed Successfully</h1>
+                <p class="text-light">Total Cost: ${{ total_cost }}</p>
+                <p class="text-light">Shipping Address: {{ checkout.shipping_address }}</p>
+                <p class="text-light">Payment Method: {{ checkout.payment_method }}</p>
+                <p class="text-light">Thank you for your purchase!</p>
+                <a href="{% url 'index' %}" class="btn btn-outline-light">Continue Shopping</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+

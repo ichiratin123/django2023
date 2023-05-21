@@ -1,0 +1,25 @@
+{% extends "base/base.html" %}
+
+{% block title %}Reset Password{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center align-items-center" style="height:420px">
+        <div class="col-lg-5">
+            <div class="card border-0 shadow-lg" style="height:80%">
+                <div class="card-body p-5 text-center bg-dark d-flex flex-column justify-content-center">
+                    <h2 class="h3 mb-4 fw-normal text-light">Reset Password</h2>
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            {{ form.email.errors }}
+                            {{ form.email.label_tag }} {{ form.email }}
+                        </div>
+                        <button class="btn btn-outline-light btn-lg px-5 mt-3" type="submit">Send password reset email</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
